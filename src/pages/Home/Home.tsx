@@ -1,15 +1,13 @@
 import Hero from '../../components/sections/Hero/Hero';
-import About from '../../components/sections/About/About';
-import Projects from '../../components/sections/Projects/Projects';
-import Contact from '../../components/sections/Contact/Contact';
+import QuickIntro from '../../components/sections/QuickIntro/QuickIntro';
+import TechStack from '../../components/sections/TechStack/TechStack';
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <About />
-      <Projects />
-      <Contact />
+      <TechStack />
+      <QuickIntro />
     </div>
   );
 };
