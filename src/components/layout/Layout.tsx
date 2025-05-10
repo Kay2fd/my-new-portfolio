@@ -3,6 +3,7 @@ import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 import ParticlesBackground from './ParticlesBackground/ParticlesBackground';
 import { useTheme } from '../../context/ThemeProvider';
+import ScrollToTop from '../common/ScrollToTop/ScrollToTop';
 
 const Layout = () => {
   const { theme } = useTheme();
@@ -33,6 +34,7 @@ const Layout = () => {
           <Outlet />
         </main>
         <Footer />
+        <ScrollToTop />
       </div>
     </div>
   );

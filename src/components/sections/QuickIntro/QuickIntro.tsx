@@ -13,12 +13,12 @@ interface HighlightCardProps {
     isDarkMode: boolean;
 }
 
-const HighlightCard: React.FC<HighlightCardProps> = ({ icon, title, description, delay, isDarkMode }) => (
+const HighlightCard: React.FC<HighlightCardProps> = ({ icon, title, description, isDarkMode }) => (
     <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay }}
-        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
         className={`p-6 rounded-xl ${isDarkMode
             ? 'bg-blue-900/10 border border-blue-800/30'
             : 'bg-blue-50/50 border border-blue-200'
