@@ -52,13 +52,8 @@ const profileData: ProfileInfo = {
             iconType: "linkedin"
         },
         {
-            name: "Twitter",
-            url: "https://twitter.com/yourusername",
-            iconType: "twitter"
-        },
-        {
             name: "Email",
-            url: "mailto:your.email@example.com",
+            url: "mailto:dikaphangestu@gmail.com",
             iconType: "email"
         }
     ],

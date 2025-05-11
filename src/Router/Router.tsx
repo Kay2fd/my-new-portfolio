@@ -3,9 +3,9 @@ import { lazy } from 'react';
 import Layout from '../components/layout/Layout';
 import LazyLoad from '../components/common/LazyLoad/LazyLoad';
 
-const Home = lazy(() => import('../pages/Home/Home'));
-const About = lazy(() => import('../pages/About/About'));
-const Projects = lazy(() => import('../pages/Projects/Projects'));
+const HomePage = lazy(() => import('../pages/Home/HomePage'));
+const AboutPage = lazy(() => import('../pages/About/AboutPage'));
+const ProjectsPage = lazy(() => import('../pages/Projects/ProjectsPage'));
 const ProjectDetailPage = lazy(() => import('../pages/ProjectsDetail/ProjectsDetail'));
 const ContactPage = lazy(() => import('../pages/Contact/ContactPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
@@ -20,20 +20,26 @@ interface RouteConfig {
 export const routeConfig: RouteConfig[] = [
   {
     path: '/',
-    component: Home,
+    component: HomePage,
     title: 'Home',
     isNavItem: true,
   },
   {
     path: '/about',
-    component: About,
+    component: AboutPage,
     title: 'About',
     isNavItem: true,
   },
   {
     path: '/projects',
-    component: Projects,
+    component: ProjectsPage,
     title: 'Projects',
+    isNavItem: true,
+  },
+  {
+    path: '/contact',
+    component: ContactPage,
+    title: 'Contact',
     isNavItem: true,
   },
 ];
@@ -62,15 +68,6 @@ const Router = () => {
                 <ProjectDetailPage />
               </LazyLoad>
             }
-          />
-
-          <Route
-          path='/contact'
-          element={
-            <LazyLoad>
-              <ContactPage />
-            </LazyLoad>
-          }
           />
 
           <Route

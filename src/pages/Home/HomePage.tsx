@@ -1,6 +1,6 @@
 import { Hero, QuickIntro, TechStack } from "../../components/sections";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <Hero />
@@ -10,4 +10,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

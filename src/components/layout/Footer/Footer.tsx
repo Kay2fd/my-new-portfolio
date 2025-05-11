@@ -1,8 +1,9 @@
 import { useTheme } from '../../../context/ThemeProvider';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope } from 'react-icons/fa';
-import { MdCode, MdHome, MdPerson, MdWork, MdContactMail } from 'react-icons/md';
+import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
+import { MdCode, MdHome, MdPerson, MdContactMail } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import logo from '../../../assets/logo/logo.png';
 
 const Footer = () => {
   const { theme } = useTheme();
@@ -20,13 +21,8 @@ const Footer = () => {
       icon: <FaLinkedinIn size={20} />,
     },
     {
-      name: 'Twitter',
-      url: 'https://twitter.com/yourusername',
-      icon: <FaTwitter size={20} />,
-    },
-    {
       name: 'Email',
-      url: 'mailto:your.email@example.com',
+      url: 'mailto:dikaphangestu@gmail.com',
       icon: <FaEnvelope size={20} />,
     },
   ];
@@ -38,7 +34,6 @@ const Footer = () => {
         { name: 'Home', path: '/', icon: <MdHome size={16} /> },
         { name: 'About', path: '/about', icon: <MdPerson size={16} /> },
         { name: 'Projects', path: '/projects', icon: <MdCode size={16} /> },
-        { name: 'Experience', path: '/experience', icon: <MdWork size={16} /> },
         { name: 'Contact', path: '/contact', icon: <MdContactMail size={16} /> },
       ],
     },
@@ -74,16 +69,6 @@ const Footer = () => {
       } backdrop-blur-md border-t ${isDarkMode ? 'border-blue-500/30' : 'border-blue-400/50'
       } transition-colors duration-300`}>
 
-      <div className="absolute top-0 left-0 w-full transform -translate-y-full overflow-hidden hidden sm:block">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full h-[70px]">
-          <path
-            fill={isDarkMode ? '#172554' : '#e6f7ee'}
-            fillOpacity={isDarkMode ? "0.2" : "0.6"}
-            d="M0,64L60,58.7C120,53,240,43,360,48C480,53,600,75,720,80C840,85,960,75,1080,64C1200,53,1320,43,1380,37.3L1440,32L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"
-          ></path>
-        </svg>
-      </div>
-
       <div className="max-w-7xl mx-auto pt-10 sm:pt-16 pb-8 px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
@@ -93,13 +78,12 @@ const Footer = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-10"
         >
           <motion.div variants={itemVariants} className="col-span-1 sm:col-span-2 lg:col-span-1 mb-6 sm:mb-0">
-            <div className="flex items-center mb-4 sm:mb-6">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mr-3 ${isDarkMode ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-500/10 text-blue-600'
-                }`}>
-                <span className="text-xl font-bold">K</span>
-              </div>
-              <h2 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-neutral-800'}`}>
-                Kay2fd Portfolio
+            <div className="flex items-center">
+              <Link to="/" className="flex items-center group -ml-6">
+                <img src={logo} alt="Logo" className="h-18 w-18" />
+              </Link>
+              <h2 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-blue-600'}`}>
+                Dika Pangestu
               </h2>
             </div>
 

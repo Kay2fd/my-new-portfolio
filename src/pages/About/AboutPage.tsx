@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PageHeader } from '../../components/common';
 import { FunFacts, ProfileSection, } from '../../components/sections';
 
-const About: React.FC = () => {
+const AboutPage: React.FC = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,4 +39,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default AboutPage;

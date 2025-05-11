@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 import ParticlesBackground from './ParticlesBackground/ParticlesBackground';
@@ -8,6 +9,11 @@ import ScrollToTop from '../common/ScrollToTop/ScrollToTop';
 const Layout = () => {
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">

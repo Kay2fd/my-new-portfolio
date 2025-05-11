@@ -1,6 +1,6 @@
 import { Projects } from "../../components/sections";
 
-  const ProjectsDetailPage = () => {
+  const ProjectsPage = () => {
       return (
           <div>
               <Projects />
@@ -8,4 +8,4 @@ import { Projects } from "../../components/sections";
       );
   };
 
-  export default ProjectsDetailPage;
+  export default ProjectsPage;

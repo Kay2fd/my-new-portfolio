@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
 
-import { FaGithub, FaLinkedinIn, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import { MdSchool, MdWork, MdLocationOn, MdCode } from 'react-icons/md';
 import { Card } from '../../common';
 import profileData from '../../../data/profile';
@@ -13,8 +13,6 @@ const renderIcon = (iconType: string, size: number = 20) => {
             return <FaGithub size={size} />;
         case 'linkedin':
             return <FaLinkedinIn size={size} />;
-        case 'twitter':
-            return <FaTwitter size={size} />;
         case 'email':
             return <FaEnvelope size={size} />;
         case 'school':
