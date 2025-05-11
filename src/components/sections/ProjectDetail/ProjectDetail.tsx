@@ -14,7 +14,6 @@ const ProjectDetail: React.FC = () => {
 
     const project = projectsData.find(p => p.id === id);
 
-    // Helper function to check if a URL is valid (not null, undefined, empty, or just whitespace)
     const isValidUrl = (url?: string): boolean => {
         return !!url && url.trim() !== '';
     };
