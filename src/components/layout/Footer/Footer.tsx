@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import { MdCode, MdHome, MdPerson, MdContactMail } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/logo/logo.png';
 
 const Footer = () => {
   const { theme } = useTheme();
@@ -80,7 +79,7 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="col-span-1 sm:col-span-2 lg:col-span-1 mb-6 sm:mb-0">
             <div className="flex items-center">
               <Link to="/" className="flex items-center group -ml-6">
-                <img src={logo} alt="Logo" className="h-18 w-18" />
+                <img src="/images/logo/logo.png" alt="Logo" className="h-18 w-18" />
               </Link>
               <h2 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-blue-600'}`}>
                 Dika Pangestu

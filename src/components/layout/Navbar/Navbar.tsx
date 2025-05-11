@@ -4,7 +4,6 @@ import { FaHome, FaUser, FaProjectDiagram, FaEnvelope } from 'react-icons/fa';
 import { useTheme } from '../../../context/ThemeProvider';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '../../common/ThemeToggle/ThemeToggle';
-import logo from '../../../assets/logo/logo.png';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -59,7 +58,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <Link to="/" className="flex items-center space-x-2 group -ml-6">
-                        <img src={logo} alt="Logo" className="h-18 w-18" />
+                        <img src="/images/logo/logo.png" alt="Logo" className="h-18 w-18" />
                     </Link>
 
                     <div className="hidden md:flex items-center space-x-8">

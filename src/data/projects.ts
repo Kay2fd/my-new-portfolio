@@ -9,11 +9,11 @@ export interface Project {
   description: string;
   shortDescription: string;
   image: string;
+  images?: string[];
   tags: ProjectTag[];
   demoUrl?: string;
   repoUrl?: string;
   featured: boolean;
-  date: string; 
 }
 
 const projectsData: Project[] = [
@@ -23,6 +23,11 @@ const projectsData: Project[] = [
     description: "A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features dark mode, animations with Framer Motion, and a clean, minimalist design.",
     shortDescription: "Modern portfolio website with React, TypeScript, and Tailwind CSS",
     image: "/images/projects/portfolio.jpg",
+    images: [
+      "/images/projects/portfolio-1.jpg",
+      "/images/projects/portfolio-2.jpg",
+      "/images/projects/portfolio-3.jpg"
+    ],
     tags: [
       { name: "React", color: "#61DAFB" },
       { name: "TypeScript", color: "#3178C6" },
@@ -32,24 +37,23 @@ const projectsData: Project[] = [
     demoUrl: "https://your-portfolio-url.com",
     repoUrl: "https://github.com/Kay2fd/my-new-portfolio",
     featured: true,
-    date: "2023-09-15"
   },
   {
-    id: "e-commerce-dashboard",
-    title: "E-Commerce Dashboard",
+    id: "evolearn",
+    title: "Evolearn",
     description: "A comprehensive admin dashboard for e-commerce platforms. Includes sales analytics, inventory management, order tracking, and customer insights. Built with React, Redux, and Material UI.",
     shortDescription: "Admin dashboard for e-commerce with analytics and management features",
-    image: "/images/projects/ecommerce-dashboard.jpg",
-    tags: [
-      { name: "React", color: "#61DAFB" },
-      { name: "Redux", color: "#764ABC" },
-      { name: "Material UI", color: "#0081CB" },
-      { name: "Chart.js", color: "#FF6384" }
+    image: "/images/projects/evolearn.png",
+    images: [
+      "/images/projects/evolearn.png",
     ],
-    demoUrl: "https://demo-ecommerce-dashboard.example.com",
-    repoUrl: "https://github.com/yourusername/ecommerce-dashboard",
+    tags: [
+      { name: "NextJs", color: "#61DAFB" },
+      { name: "Tailwind CSS", color: "#06B6D4" },
+    ],
+    demoUrl: "",
+    repoUrl: "",
     featured: true,
-    date: "2023-07-20"
   },
   {
     id: "weather-app",
@@ -62,10 +66,9 @@ const projectsData: Project[] = [
       { name: "API Integration", color: "#FF5722" },
       { name: "Geolocation", color: "#4CAF50" }
     ],
-    demoUrl: "https://weather-app-demo.example.com",
-    repoUrl: "https://github.com/yourusername/weather-app",
+    demoUrl: "",
+    repoUrl: "",
     featured: false,
-    date: "2023-05-10"
   },
   {
     id: "task-manager",
@@ -78,10 +81,9 @@ const projectsData: Project[] = [
       { name: "Firebase", color: "#FFCA28" },
       { name: "styled-components", color: "#DB7093" }
     ],
-    demoUrl: " ",
-    repoUrl: " ",
+    demoUrl: "",
+    repoUrl: "",
     featured: false,
-    date: "2023-03-15"
   }
 ];
 
