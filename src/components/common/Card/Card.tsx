@@ -62,11 +62,10 @@ const Card: React.FC<CardProps> = ({
         <motion.div
             className={cardClasses}
             {...motionProps}
-            {...rest}
+            {...(rest as MotionProps)}
         >
-            {children}
+            {children}  
         </motion.div>
     );
 };
-
 export default Card;

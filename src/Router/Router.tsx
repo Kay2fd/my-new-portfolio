@@ -7,6 +7,7 @@ const Home = lazy(() => import('../pages/Home/Home'));
 const About = lazy(() => import('../pages/About/About'));
 const Projects = lazy(() => import('../pages/Projects/Projects'));
 const ProjectDetailPage = lazy(() => import('../pages/ProjectsDetail/ProjectsDetail'));
+const ContactPage = lazy(() => import('../pages/Contact/ContactPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 interface RouteConfig {
@@ -61,6 +62,15 @@ const Router = () => {
                 <ProjectDetailPage />
               </LazyLoad>
             }
+          />
+
+          <Route
+          path='/contact'
+          element={
+            <LazyLoad>
+              <ContactPage />
+            </LazyLoad>
+          }
           />
 
           <Route
