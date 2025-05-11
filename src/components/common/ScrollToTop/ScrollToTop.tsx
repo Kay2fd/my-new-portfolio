@@ -35,7 +35,7 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ className = '' }) => {
     fixed bottom-6 right-6 sm:bottom-8 sm:right-8
     p-3 rounded-full shadow-lg z-50
     ${isDarkMode
-            ? 'bg-blue-600 hover:bg-blue-500 text-white'
+            ? 'bg-blue-900 hover:bg-blue-500 text-white'
             : 'bg-blue-500 hover:bg-blue-600 text-white'}
     transition-all duration-300
     focus:outline-none focus:ring-2 focus:ring-offset-2

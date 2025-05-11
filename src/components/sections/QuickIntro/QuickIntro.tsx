@@ -4,37 +4,42 @@ import { useTheme } from "../../../context/ThemeProvider";
 import { FaCode, FaLaptopCode, FaRocket } from "react-icons/fa";
 import { MdOutlineDesignServices, MdOutlineIntegrationInstructions } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
+import { Card } from "../../common";
 
 interface HighlightCardProps {
     icon: React.ReactNode;
     title: string;
     description: string;
     delay: number;
-    isDarkMode: boolean;
 }
 
-const HighlightCard: React.FC<HighlightCardProps> = ({ icon, title, description, isDarkMode }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        viewport={{ once: true }}
-        className={`p-6 rounded-xl ${isDarkMode
-            ? 'bg-blue-900/10 border border-blue-800/30'
-            : 'bg-blue-50/50 border border-blue-200'
-            } shadow-lg hover:shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1`}
-    >
-        <div className={`text-3xl mb-4 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-            {icon}
-        </div>
-        <h3 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-blue-700'}`}>
-            {title}
-        </h3>
-        <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            {description}
-        </p>
-    </motion.div>
-);
+const HighlightCard: React.FC<HighlightCardProps> = ({ icon, title, description, delay }) => {
+    const { theme } = useTheme();
+    const isDarkMode = theme === 'dark';
+
+    return (
+        <Card
+            variant="default"
+            className="p-6"
+            motionProps={{
+                initial: { opacity: 0, y: 10 },
+                whileInView: { opacity: 1, y: 0 },
+                transition: { duration: 0.5, delay: 0.2 + delay * 0.1 },
+                viewport: { once: true }
+            }}
+        >
+            <div className={`text-3xl mb-4 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                {icon}
+            </div>
+            <h3 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-blue-700'}`}>
+                {title}
+            </h3>
+            <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                {description}
+            </p>
+        </Card>
+    );
+};
 
 const QuickIntro: React.FC = () => {
     const { theme } = useTheme();
@@ -86,21 +91,18 @@ const QuickIntro: React.FC = () => {
                         title="Clean Code"
                         description="I write clean, maintainable code with a focus on best practices and modern development standards."
                         delay={0.2}
-                        isDarkMode={isDarkMode}
                     />
                     <HighlightCard
                         icon={<FaLaptopCode />}
                         title="Responsive Design"
                         description="Creating applications that work flawlessly across all devices and screen sizes is my priority."
                         delay={0.4}
-                        isDarkMode={isDarkMode}
                     />
                     <HighlightCard
                         icon={<FaRocket />}
                         title="Performance Focused"
                         description="I optimize applications for speed and efficiency, ensuring the best possible user experience."
                         delay={0.6}
-                        isDarkMode={isDarkMode}
                     />
                 </div>
 
@@ -110,21 +112,18 @@ const QuickIntro: React.FC = () => {
                         title="UI/UX Design"
                         description="I create intuitive and engaging user interfaces with a focus on user experience and accessibility."
                         delay={0.3}
-                        isDarkMode={isDarkMode}
                     />
                     <HighlightCard
                         icon={<MdOutlineIntegrationInstructions />}
                         title="API Integration"
                         description="I seamlessly connect applications with third-party services and APIs to extend functionality."
                         delay={0.5}
-                        isDarkMode={isDarkMode}
                     />
                     <HighlightCard
                         icon={<BsGraphUp />}
                         title="Scalable Solutions"
                         description="I build applications that can grow with your business, from MVP to enterprise-level solutions."
                         delay={0.7}
-                        isDarkMode={isDarkMode}
                     />
                 </div>
             </div>

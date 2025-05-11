@@ -9,6 +9,7 @@ import {
     SiTypescript, SiTailwindcss, SiNextdotjs, SiFirebase, SiVercel, SiFramer,
     SiLaravel
 } from "react-icons/si";
+import { Card } from "../../common";
 
 interface TechItem {
     name: string;
@@ -62,17 +63,17 @@ const TechStack = () => {
                 <div className="space-y-12">
                     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-6">
                         {topRowItems.map((tech, index) => (
-                            <motion.div
-                                layout
+                            <Card
                                 key={tech.name}
-                                initial={{ x: -50, opacity: 0 }}
-                                whileInView={{ x: 0, opacity: 1 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className={`flex flex-col items-center justify-center p-4 rounded-xl backdrop-blur-sm transition-all duration-300 ${isDarkMode
-                                        ? 'bg-blue-900/10 hover:bg-blue-900/20 border border-blue-800/30'
-                                        : 'bg-blue-50/50 hover:bg-blue-100/70 border border-blue-200/50'
-                                    } hover:shadow-lg hover:scale-105`}
+                                variant="glass"
+                                className="flex flex-col items-center justify-center p-4"
+                                motionProps={{
+                                    layout: true,
+                                    initial: { x: -50, opacity: 0 },
+                                    whileInView: { x: 0, opacity: 1 },
+                                    transition: { duration: 0.5, delay: index * 0.1 },
+                                    viewport: { once: true }
+                                }}
                             >
                                 <div className={`text-4xl md:text-5xl ${tech.color}`}>
                                     {tech.icon}
@@ -80,22 +81,22 @@ const TechStack = () => {
                                 <span className={`mt-3 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                     {tech.name}
                                 </span>
-                            </motion.div>
+                            </Card>
                         ))}
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-6">
                         {bottomRowItems.map((tech, index) => (
-                            <motion.div
+                            <Card
                                 key={tech.name}
-                                initial={{ x: 50, opacity: 0 }}
-                                whileInView={{ x: 0, opacity: 1 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className={`flex flex-col items-center justify-center p-4 rounded-xl backdrop-blur-sm transition-all duration-300 ${isDarkMode
-                                        ? 'bg-blue-900/10 hover:bg-blue-900/20 border border-blue-800/30'
-                                        : 'bg-blue-50/50 hover:bg-blue-100/70 border border-blue-200/50'
-                                    } hover:shadow-lg hover:scale-105`}
+                                variant="glass"
+                                className="flex flex-col items-center justify-center p-4"
+                                motionProps={{
+                                    initial: { x: 50, opacity: 0 },
+                                    whileInView: { x: 0, opacity: 1 },
+                                    transition: { duration: 0.5, delay: index * 0.1 },
+                                    viewport: { once: true }
+                                }}
                             >
                                 <div className={`text-4xl md:text-5xl ${tech.color}`}>
                                     {tech.icon}
@@ -103,7 +104,7 @@ const TechStack = () => {
                                 <span className={`mt-3 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                     {tech.name}
                                 </span>
-                            </motion.div>
+                            </Card>
                         ))}
                     </div>
                 </div>

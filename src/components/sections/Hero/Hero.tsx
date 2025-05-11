@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import Button from "../../common/Button/Button";
 import { FaArrowDown } from "react-icons/fa6";
 import { useTheme } from "../../../context/ThemeProvider";
+import { Button } from "../../common";
 
 const Hero = () => {
     const { theme } = useTheme();

@@ -1,0 +1,9 @@
+export { default as About } from './About/About';
+export { default as QuickIntro } from './QuickIntro/QuickIntro';
+export { default as TechStack } from './TechStack/TechStack';
+export { default as Projects } from './Projects/Projects';
+export { default as ProjectDetail } from './ProjectDetail/ProjectDetail';
+export { default as Contact } from './Contact/Contact';
+export { default as Hero } from './Hero/Hero';
+export { default as ProfileSection } from './ProfileSection/ProfileSection';
+export { default as FunFacts } from './FunFacts/FunFacts';

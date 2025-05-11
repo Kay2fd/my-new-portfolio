@@ -1,6 +1,4 @@
-import Hero from '../../components/sections/Hero/Hero';
-import QuickIntro from '../../components/sections/QuickIntro/QuickIntro';
-import TechStack from '../../components/sections/TechStack/TechStack';
+import { Hero, QuickIntro, TechStack } from "../../components/sections";
 
 const Home = () => {
   return (
