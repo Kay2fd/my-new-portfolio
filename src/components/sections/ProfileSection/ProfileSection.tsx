@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
 
 import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import { MdSchool, MdWork, MdLocationOn, MdCode } from 'react-icons/md';
 import { Card } from '../../common';
-import profileData from '../../../data/profile';
+import defaultProfileData from '../../../data/profile';
+import { fetchProfileData } from '../../../services/profilService';
 
 const renderIcon = (iconType: string, size: number = 20) => {
     switch (iconType) {
@@ -29,6 +30,30 @@ const renderIcon = (iconType: string, size: number = 20) => {
 const ProfileSection: React.FC = () => {
     const { theme } = useTheme();
     const isDarkMode = theme === 'dark';
+    const [profileData, setProfileData] = useState(defaultProfileData);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadProfileData = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchProfileData();
+                if (data) {
+                    setProfileData(data);
+                }
+            } catch (err) {
+                console.error('Error loading profile data:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadProfileData();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center py-16">Loading profile...</div>;
+    }
 
     return (
         <section className="mb-16">

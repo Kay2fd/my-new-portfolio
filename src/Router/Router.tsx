@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import Layout from '../components/layout/Layout';
 import LazyLoad from '../components/common/LazyLoad/LazyLoad';
+import AdminLayout from '../components/layout/AdminLayout';
+import ProtectedRoute from '../components/common/ProtectedRoute/ProtectedRoute';
 
 const HomePage = lazy(() => import('../pages/Home/HomePage'));
 const AboutPage = lazy(() => import('../pages/About/AboutPage'));
@@ -9,6 +11,8 @@ const ProjectsPage = lazy(() => import('../pages/Projects/ProjectsPage'));
 const ProjectDetailPage = lazy(() => import('../pages/ProjectsDetail/ProjectsDetail'));
 const ContactPage = lazy(() => import('../pages/Contact/ContactPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
+const LoginPage = lazy(() => import('../pages/Login/LoginPage'));
+const ProfileAdminPage = lazy(() => import('../pages/Admin/ProfileAdmin'));
 
 interface RouteConfig {
   path: string;
@@ -71,10 +75,35 @@ const Router = () => {
           />
 
           <Route
+            path="/login"
+            element={
+              <LazyLoad>
+                <LoginPage />
+              </LazyLoad>
+            }
+          />
+
+          <Route
             path="*"
             element={
               <LazyLoad>
                 <NotFound />
+              </LazyLoad>
+            }
+          />
+        </Route>
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }>
+          <Route
+            path="profile"
+            element={
+              <LazyLoad>
+                <ProfileAdminPage />
               </LazyLoad>
             }
           />
