@@ -72,7 +72,7 @@ const FunFacts: React.FC = () => {
               key={fact.title}
               variant="glass"
               hoverEffect={true}
-              className="h-full"
+              className="h-full shadow-lg"
               motionProps={{
                 initial: { opacity: 0, y: 20 },
                 whileInView: { opacity: 1, y: 0 },

@@ -8,5 +8,4 @@ if (!supabaseUrl || !supabaseServiceKey) {
   throw new Error('Missing Supabase admin environment variables');
 }
 
-// Client dengan service role key yang mem-bypass RLS
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);

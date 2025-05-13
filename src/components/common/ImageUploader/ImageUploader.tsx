@@ -58,7 +58,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       const { data: sessionData } = await supabase.auth.getSession();
       console.log("Current session:", sessionData.session ? "Active" : "None");
 
-      // Upload file to Supabase Storage
       const { data, error: uploadError } = await supabase.storage
         .from(bucketName)
         .upload(filePath, file);
@@ -70,17 +69,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
       console.log('Upload successful, data:', data);
 
-      // Get public URL - getPublicUrl tidak mengembalikan error dalam versi terbaru
       const { data: urlData } = await supabase.storage
         .from(bucketName)
         .getPublicUrl(filePath);
 
       console.log('Public URL:', urlData.publicUrl);
       
-      // Update preview
       setPreview(urlData.publicUrl);
       
-      // Call callback with URL
       onImageUploaded(urlData.publicUrl);
       
       console.log('Profile avatar updated in database');

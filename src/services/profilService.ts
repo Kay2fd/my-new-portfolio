@@ -1,35 +1,47 @@
 import { supabase } from '../lib/supabase';
 import type { ProfileInfo } from '../data/profile';
 
-// Fetch profile data from Supabase
 export const fetchProfileData = async (): Promise<ProfileInfo | null> => {
   try {
-    // Ambil data dari tabel profile
     const { data, error } = await supabase
       .from('profile')
       .select('*')
-      .single(); // Gunakan single() untuk mendapatkan satu baris
+      .single();
 
     if (error) {
       console.error('Error fetching profile data:', error);
       return null;
     }
 
-    // Jika tidak ada data, kembalikan null
     if (!data) return null;
 
-    // Konversi data dari database ke format ProfileInfo
+    let quickFactsArray: string[] = [];
+    if (data.quick_facts) {
+      if (Array.isArray(data.quick_facts)) {
+        quickFactsArray = data.quick_facts;
+      } else {
+        try {
+          const parsed = JSON.parse(data.quick_facts);
+          if (Array.isArray(parsed)) {
+            quickFactsArray = parsed;
+          }
+        } catch (e) {
+          console.error('Error parsing quick_facts:', e);
+        }
+      }
+    }
+
     return {
       name: data.name || 'Dika Pangestu',
       role: data.role || 'Frontend Developer',
       avatar: data.avatar_url || '/path/to/profile-image.jpg',
       bio: {
-        paragraphs: data.bio_paragraphs || [
+        paragraphs: data.bio ? data.bio.split('\n\n') : [
           "Hello! I'm Dika Pangestu, a passionate Software Engineering student with a focus on frontend development.",
           "My journey in tech began with a curiosity about how websites work.",
           "As a student, I'm constantly learning and expanding my knowledge."
         ],
-        quickFacts: data.bio_quick_facts || [
+        quickFacts: quickFactsArray.length > 0 ? quickFactsArray : [
           "Currently in my final year of Software Engineering studies",
           "Working as a Frontend Developer Intern at a tech startup",
           "Passionate about creating intuitive user interfaces"
@@ -38,12 +50,10 @@ export const fetchProfileData = async (): Promise<ProfileInfo | null> => {
       socialLinks: data.social_links || [
         {
           name: "GitHub",
-          url: "https://github.com/Kay2fd",
           iconType: "github"
         },
         {
           name: "LinkedIn",
-          url: "https://www.linkedin.com/in/dika-pangestu/",
           iconType: "linkedin"
         },
         {
@@ -73,10 +83,8 @@ export const fetchProfileData = async (): Promise<ProfileInfo | null> => {
   }
 };
 
-// Update profile image
 export const updateProfileImage = async (imageUrl: string): Promise<boolean> => {
   try {
-    // Cek apakah profil sudah ada
     const { data: existingProfile, error: fetchError } = await supabase
       .from('profile')
       .select('*')
@@ -87,7 +95,6 @@ export const updateProfileImage = async (imageUrl: string): Promise<boolean> => 
       return false;
     }
 
-    // Jika profil sudah ada, update avatar_url
     if (existingProfile) {
       const { error: updateError } = await supabase
         .from('profile')
@@ -99,14 +106,13 @@ export const updateProfileImage = async (imageUrl: string): Promise<boolean> => 
         return false;
       }
     } else {
-      // Jika profil belum ada, buat profil baru
       const { error: insertError } = await supabase
         .from('profile')
         .insert([
-          { 
-            name: 'Dika Pangestu', 
+          {
+            name: 'Dika Pangestu',
             role: 'Frontend Developer',
-            avatar_url: imageUrl 
+            avatar_url: imageUrl
           }
         ]);
 
@@ -123,10 +129,12 @@ export const updateProfileImage = async (imageUrl: string): Promise<boolean> => 
   }
 };
 
-// Update profile information (name and role)
-export const updateProfileInfo = async (name: string, role: string): Promise<boolean> => {
+export const updateProfileInfo = async (
+  name: string,
+  role: string,
+  bio?: string
+): Promise<boolean> => {
   try {
-    // Cek apakah profil sudah ada
     const { data: existingProfile, error: fetchError } = await supabase
       .from('profile')
       .select('*')
@@ -137,11 +145,15 @@ export const updateProfileInfo = async (name: string, role: string): Promise<boo
       return false;
     }
 
-    // Jika profil sudah ada, update name dan role
+    const updateData: any = { name, role };
+    if (bio !== undefined) {
+      updateData.bio = bio;
+    }
+
     if (existingProfile) {
       const { error: updateError } = await supabase
         .from('profile')
-        .update({ name, role })
+        .update(updateData)
         .eq('id', existingProfile.id);
 
       if (updateError) {
@@ -149,10 +161,9 @@ export const updateProfileInfo = async (name: string, role: string): Promise<boo
         return false;
       }
     } else {
-      // Jika profil belum ada, buat profil baru
       const { error: insertError } = await supabase
         .from('profile')
-        .insert([{ name, role }]);
+        .insert([updateData]);
 
       if (insertError) {
         console.error('Error creating new profile with info:', insertError);
@@ -163,6 +174,86 @@ export const updateProfileInfo = async (name: string, role: string): Promise<boo
     return true;
   } catch (error) {
     console.error('Error in updateProfileInfo service:', error);
+    return false;
+  }
+};
+
+export const updateProfileBio = async (bio: string): Promise<boolean> => {
+  try {
+    const { data: existingProfile, error: fetchError } = await supabase
+      .from('profile')
+      .select('*')
+      .single();
+
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      console.error('Error fetching existing profile:', fetchError);
+      return false;
+    }
+
+    if (existingProfile) {
+      const { error: updateError } = await supabase
+        .from('profile')
+        .update({ bio })
+        .eq('id', existingProfile.id);
+
+      if (updateError) {
+        console.error('Error updating profile bio:', updateError);
+        return false;
+      }
+    } else {
+      const { error: insertError } = await supabase
+        .from('profile')
+        .insert([{ bio }]);
+
+      if (insertError) {
+        console.error('Error creating new profile with bio:', insertError);
+        return false;
+      }
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error in updateProfileBio service:', error);
+    return false;
+  }
+};
+
+export const updateProfileQuickFacts = async (quickFacts: string[]): Promise<boolean> => {
+  try {
+    const { data: existingProfile, error: fetchError } = await supabase
+      .from('profile')
+      .select('*')
+      .single();
+
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      console.error('Error fetching existing profile:', fetchError);
+      return false;
+    }
+
+    if (existingProfile) {
+      const { error: updateError } = await supabase
+        .from('profile')
+        .update({ quick_facts: quickFacts })
+        .eq('id', existingProfile.id);
+
+      if (updateError) {
+        console.error('Error updating profile quick facts:', updateError);
+        return false;
+      }
+    } else {
+      const { error: insertError } = await supabase
+        .from('profile')
+        .insert([{ quick_facts: quickFacts }]);
+
+      if (insertError) {
+        console.error('Error creating new profile with quick facts:', insertError);
+        return false;
+      }
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error in updateProfileQuickFacts service:', error);
     return false;
   }
 };

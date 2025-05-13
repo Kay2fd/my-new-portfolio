@@ -38,8 +38,8 @@ const Card: React.FC<CardProps> = ({
             : 'bg-white border border-blue-100 shadow-md',
 
         glass: isDarkMode
-            ? 'bg-blue-900/10 backdrop-blur-sm border border-blue-800/30'
-            : 'bg-blue-50/50 backdrop-blur-sm border border-blue-200/50',
+            ? 'bg-blue-900/10 backdrop-blur-sm shadow-lg border border-blue-900/20'
+            : 'bg-blue-50/50 backdrop-blur-sm border shadow-lg border-blue-200',
     };
 
     const hoverClasses = hoverEffect
@@ -64,7 +64,7 @@ const Card: React.FC<CardProps> = ({
             {...motionProps}
             {...(rest as MotionProps)}
         >
-            {children}  
+            {children}
         </motion.div>
     );
 };
