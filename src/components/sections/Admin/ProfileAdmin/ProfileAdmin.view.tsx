@@ -67,7 +67,6 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
             </h1>
 
             <div className="grid grid-cols-1 gap-4 md:gap-8">
-                {/* Profile Image Section */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6"
@@ -96,11 +95,11 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                             currentImageUrl={currentImageUrl}
                             bucketName="profile-images"
                             folderPath="public"
+                            previewShape="circle"
                         />
                     )}
                 </Card>
 
-                {/* Profile Information Section */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6"
@@ -138,8 +137,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                            ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                            : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                        ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                        : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                         }`}
                                     required
                                 />
@@ -158,8 +157,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                     value={role}
                                     onChange={(e) => setRole(e.target.value)}
                                     className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                            ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                            : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                        ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                        : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                         }`}
                                 />
                             </div>
@@ -167,8 +166,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                             <button
                                 type="submit"
                                 className={`w-full md:w-auto py-2 px-4 rounded transition-colors duration-300 text-sm md:text-base ${isDarkMode
-                                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
                                     }`}
                             >
                                 Update Profile Info
@@ -177,7 +176,6 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                     )}
                 </Card>
 
-                {/* Bio Section */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6"
@@ -215,8 +213,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                     onChange={(e) => setBio(e.target.value)}
                                     rows={6}
                                     className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                            ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                            : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                        ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                        : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                         }`}
                                     required
                                 />
@@ -228,8 +226,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                             <button
                                 type="submit"
                                 className={`w-full md:w-auto py-2 px-4 rounded transition-colors duration-300 text-sm md:text-base ${isDarkMode
-                                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
                                     }`}
                             >
                                 Update Bio
@@ -238,7 +236,6 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                     )}
                 </Card>
 
-                {/* Quick Facts Section */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6"
@@ -283,8 +280,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                                         type="button"
                                                         onClick={() => handleRemoveQuickFact(index)}
                                                         className={`p-1 rounded-full ${isDarkMode
-                                                                ? 'bg-red-900/30 text-red-300 hover:bg-red-800/50'
-                                                                : 'bg-red-100 text-red-600 hover:bg-red-200'
+                                                            ? 'bg-red-900/30 text-red-300 hover:bg-red-800/50'
+                                                            : 'bg-red-100 text-red-600 hover:bg-red-200'
                                                             }`}
                                                         aria-label="Remove fact"
                                                     >
@@ -314,8 +311,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                             value={newQuickFact}
                                             onChange={(e) => setNewQuickFact(e.target.value)}
                                             className={`flex-1 p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                                    ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                                    : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                                ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                                : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                                 }`}
                                             placeholder="Enter a new quick fact"
                                             onKeyPress={(e) => {
@@ -329,8 +326,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                                             type="button"
                                             onClick={handleAddQuickFact}
                                             className={`p-2 rounded transition-colors duration-300 ${isDarkMode
-                                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                                ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                                : 'bg-blue-500 hover:bg-blue-600 text-white'
                                                 }`}
                                             disabled={!newQuickFact.trim()}
                                         >
@@ -343,8 +340,8 @@ const ProfileAdminView: React.FC<ProfileAdminViewProps> = ({
                             <button
                                 type="submit"
                                 className={`w-full md:w-auto py-2 px-4 rounded transition-colors duration-300 text-sm md:text-base ${isDarkMode
-                                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
                                     }`}
                                 disabled={quickFacts.length === 0}
                             >

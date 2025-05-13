@@ -12,7 +12,8 @@ const ProjectDetailPage = lazy(() => import('../pages/ProjectsDetail/ProjectsDet
 const ContactPage = lazy(() => import('../pages/Contact/ContactPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const LoginPage = lazy(() => import('../pages/Login/LoginPage'));
-const ProfileAdminPage = lazy(() => import('../pages/Admin/ProfileAdmin'));
+const ProfileAdminPage = lazy(() => import('../pages/Admin/Profile/ProfileAdmin'));
+const CertificatesAdminPage = lazy(() => import('../pages/Admin/Certificates/CertificatesAdminPage'));
 
 interface RouteConfig {
   path: string;
@@ -93,7 +94,6 @@ const Router = () => {
           />
         </Route>
 
-        {/* Admin Routes */}
         <Route path="/admin" element={
           <ProtectedRoute>
             <AdminLayout />
@@ -104,6 +104,14 @@ const Router = () => {
             element={
               <LazyLoad>
                 <ProfileAdminPage />
+              </LazyLoad>
+            }
+          />
+          <Route
+            path="certificates"
+            element={
+              <LazyLoad>
+                <CertificatesAdminPage />
               </LazyLoad>
             }
           />

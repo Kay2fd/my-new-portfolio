@@ -1,46 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../common/Card/Card';
 import { FaCertificate } from 'react-icons/fa';
 import { HiAcademicCap } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
-
-interface Certificate {
-    id: number;
-    title: string;
-    issuer: string;
-    description: string;
-    image: string;
-}
+import { fetchCertificates, type Certificate } from '../../../services/certificateServices';
 
 const Certificates: React.FC = () => {
     const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+    const [certificates, setCertificates] = useState<Certificate[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const { theme } = useTheme();
     const isDarkMode = theme === 'dark';
 
-    const certificates: Certificate[] = [
-        {
-            id: 1,
-            title: "React Developer Certification",
-            issuer: "Meta",
-            description: "Advanced React development including hooks, context API, and performance optimization.",
-            image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        },
-        {
-            id: 2,
-            title: "TypeScript Professional",
-            issuer: "Microsoft",
-            description: "Comprehensive TypeScript development and type system mastery.",
-            image: "https://images.unsplash.com/photo-1544982877-f0f4427dee24?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        },
-        {
-            id: 3,
-            title: "Frontend Web Development",
-            issuer: "Udacity",
-            description: "Modern frontend development with JavaScript, HTML5, and CSS3.",
-            image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        }
-    ];
+    useEffect(() => {
+        const loadCertificates = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchCertificates();
+                setCertificates(data);
+            } catch (err) {
+                console.error('Error loading certificates:', err);
+                setError('Failed to load certificates');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadCertificates();
+    }, []);
 
     const openCertificate = (cert: Certificate) => {
         setSelectedCertificate(cert);
@@ -49,6 +38,48 @@ const Certificates: React.FC = () => {
     const closeCertificate = () => {
         setSelectedCertificate(null);
     };
+
+    if (loading) {
+        return (
+            <section className="py-12" id="certificates">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center py-12">
+                        <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            Loading certificates...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="py-12" id="certificates">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center py-12">
+                        <p className={`text-xl text-red-500`}>
+                            {error}
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (certificates.length === 0) {
+        return (
+            <section className="py-12" id="certificates">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center py-12">
+                        <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            No certificates found.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="py-12" id="certificates">
@@ -72,7 +103,7 @@ const Certificates: React.FC = () => {
                 </motion.div>
 
                 <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {certificates.map((cert) => (
+                    {certificates.map((cert, index) => (
                         <Card
                             key={cert.id}
                             variant="glass"
@@ -83,14 +114,14 @@ const Certificates: React.FC = () => {
                             motionProps={{
                                 initial: { opacity: 0, y: 20 },
                                 whileInView: { opacity: 1, y: 0 },
-                                transition: { duration: 0.5, delay: cert.id * 0.1 },
+                                transition: { duration: 0.5, delay: index * 0.1 },
                                 viewport: { once: true },
                                 whileHover: { y: -5, transition: { duration: 0.2 } }
                             }}
                         >
                             <div className="h-48 overflow-hidden">
                                 <img
-                                    src={cert.image}
+                                    src={cert.image_url}
                                     alt={cert.title}
                                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                 />
@@ -143,7 +174,7 @@ const Certificates: React.FC = () => {
                             <div className={`relative h-96 ${isDarkMode ? "bg-gray-800/50" : "bg-blue-50"
                                 }`}>
                                 <img
-                                    src={selectedCertificate.image}
+                                    src={selectedCertificate.image_url}
                                     alt={selectedCertificate.title}
                                     className="w-full h-full object-contain"
                                 />

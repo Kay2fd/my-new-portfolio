@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaSignOutAlt, FaUser, FaHome, FaBars, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaSignOutAlt, FaUser, FaHome, FaBars, FaTimes, FaChevronLeft, FaChevronRight, FaCertificate } from 'react-icons/fa';
 import { useTheme } from '../../../context/ThemeProvider';
 import { supabase } from '../../../lib/supabase';
 import ThemeToggle from '../../common/ThemeToggle/ThemeToggle';
@@ -224,6 +224,19 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ onSidebarCollapse }) => {
                   >
                     <FaUser />
                     {!isSidebarCollapsed && <span>Profile</span>}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/certificates"
+                    className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : 'space-x-2'} p-3 rounded-lg transition-all duration-300 cursor-pointer ${isDarkMode
+                      ? 'hover:bg-blue-100/10 text-cyan-400 hover:text-white'
+                      : 'hover:bg-blue-100 text-blue-700 hover:text-blue-600'
+                      }`}
+                    onClick={() => window.innerWidth < 768 && setSidebarOpen(false)}
+                  >
+                    <FaCertificate />
+                    {!isSidebarCollapsed && <span>Certificates</span>}
                   </Link>
                 </li>
               </ul>
