@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
 
 import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import { MdSchool, MdWork, MdLocationOn, MdCode } from 'react-icons/md';
 import { Card } from '../../common';
-import profileData from '../../../data/profile';
+import defaultProfileData from '../../../data/profile';
+import { fetchProfileData } from '../../../services/profilService';
 
 const renderIcon = (iconType: string, size: number = 20) => {
     switch (iconType) {
@@ -29,6 +30,26 @@ const renderIcon = (iconType: string, size: number = 20) => {
 const ProfileSection: React.FC = () => {
     const { theme } = useTheme();
     const isDarkMode = theme === 'dark';
+    const [profileData, setProfileData] = useState(defaultProfileData);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadProfileData = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchProfileData();
+                if (data) {
+                    setProfileData(data);
+                }
+            } catch (err) {
+                console.error('Error loading profile data:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadProfileData();
+    }, []);
 
     return (
         <section className="mb-16">
@@ -40,6 +61,10 @@ const ProfileSection: React.FC = () => {
                         motionProps={{
                             whileHover: { y: -5 }
                         }}
+                        isLoading={loading}
+                        loaderLines={4}
+                        loaderImageHeight="h-48"
+                        loaderHasImage={true}
                     >
                         <div className="mb-6 relative mx-auto">
                             <div className={`w-48 h-48 rounded-full overflow-hidden mx-auto border-4 ${isDarkMode ? 'border-blue-500/30' : 'border-blue-200'}`}>
@@ -105,6 +130,10 @@ const ProfileSection: React.FC = () => {
                     <Card
                         variant="glass"
                         className="p-6 h-full"
+                        isLoading={loading}
+                        loaderLines={6}
+                        loaderImageHeight="h-0"
+                        loaderHasImage={false}
                     >
                         <h3 className={`text-2xl font-bold mb-4 pb-3 border-b ${isDarkMode ? 'text-white border-blue-800/30' : 'text-blue-700 border-blue-200'
                             }`}>

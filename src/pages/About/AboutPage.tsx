@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PageHeader } from '../../components/common';
-import { FunFacts, ProfileSection, } from '../../components/sections';
+import { Certificates, FunFacts, ProfileSection, } from '../../components/sections';
 
 const AboutPage: React.FC = () => {
   const containerVariants = {
@@ -30,6 +30,8 @@ const AboutPage: React.FC = () => {
           />
           
           <ProfileSection />
+          
+          <Certificates />
           
           <FunFacts />
           

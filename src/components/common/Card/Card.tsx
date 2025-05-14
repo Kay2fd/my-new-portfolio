@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
+import CardLoader from '../CardLoader/CardLoader';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: 'default' | 'outlined' | 'elevated' | 'glass';
@@ -8,6 +9,10 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     clickable?: boolean;
     motionProps?: MotionProps;
     children: React.ReactNode;
+    isLoading?: boolean;
+    loaderLines?: number;
+    loaderImageHeight?: string;
+    loaderHasImage?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -17,6 +22,10 @@ const Card: React.FC<CardProps> = ({
     motionProps,
     className = '',
     children,
+    isLoading = false,
+    loaderLines = 3,
+    loaderImageHeight = 'h-48',
+    loaderHasImage = true,
     ...rest
 }) => {
     const { theme } = useTheme();
@@ -38,8 +47,8 @@ const Card: React.FC<CardProps> = ({
             : 'bg-white border border-blue-100 shadow-md',
 
         glass: isDarkMode
-            ? 'bg-blue-900/10 backdrop-blur-sm border border-blue-800/30'
-            : 'bg-blue-50/50 backdrop-blur-sm border border-blue-200/50',
+            ? 'bg-blue-900/10 backdrop-blur-sm shadow-lg border border-blue-900/20'
+            : 'bg-blue-50/50 backdrop-blur-sm border shadow-lg border-blue-200',
     };
 
     const hoverClasses = hoverEffect
@@ -58,13 +67,24 @@ const Card: React.FC<CardProps> = ({
     ${className}
   `.trim();
 
+    if (isLoading) {
+        return (
+            <CardLoader 
+                lines={loaderLines} 
+                imageHeight={loaderImageHeight} 
+                hasImage={loaderHasImage} 
+                className={className}
+            />
+        );
+    }
+
     return (
         <motion.div
             className={cardClasses}
             {...motionProps}
             {...(rest as MotionProps)}
         >
-            {children}  
+            {children}
         </motion.div>
     );
 };
