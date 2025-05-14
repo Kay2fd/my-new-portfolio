@@ -10,7 +10,7 @@ interface CertificatesAdminViewProps {
   loading: boolean;
   error: string | null;
   isEditing: boolean;
-  currentCertificate: Certificate | null; // This is used indirectly in the component
+  currentCertificate: Certificate | null;
   title: string;
   issuer: string;
   description: string;
@@ -33,8 +33,6 @@ const CertificatesAdminView: React.FC<CertificatesAdminViewProps> = ({
   loading,
   error,
   isEditing,
-  // We're removing currentCertificate from the destructuring since it's not directly used
-  // but we still need it in the props interface for type safety
   title,
   issuer,
   description,

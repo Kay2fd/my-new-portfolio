@@ -30,10 +30,9 @@ const ProjectAdmin: React.FC = () => {
     const [repoUrl, setRepoUrl] = useState('');
     const [demoUrl, setDemoUrl] = useState('');
 
-    // Tag management
     const [tags, setTags] = useState<ProjectTag[]>([]);
     const [tagName, setTagName] = useState('');
-    const [tagColor, setTagColor] = useState('#3B82F6'); // Default blue
+    const [tagColor, setTagColor] = useState('#3B82F6');
 
     const [formError, setFormError] = useState<string | null>(null);
     const [formSuccess, setFormSuccess] = useState<string | null>(null);
@@ -110,7 +109,6 @@ const ProjectAdmin: React.FC = () => {
         setFormError(null);
         setFormSuccess(null);
 
-        // Validate form
         if (!title.trim() || !shortDescription.trim() || !description.trim() || !thumbnailUrl.trim()) {
             setFormError('Title, short description, description, and thumbnail image are required');
             return;
@@ -134,12 +132,10 @@ const ProjectAdmin: React.FC = () => {
             };
 
             if (isEditing && currentProject) {
-                // Update existing project
                 const success = await updateProject(currentProject.id, projectData);
 
                 if (success) {
                     setFormSuccess('Project updated successfully!');
-                    // Update the projects list
                     setProjects(projects.map(proj =>
                         proj.id === currentProject.id
                             ? { ...proj, ...projectData }
@@ -150,12 +146,10 @@ const ProjectAdmin: React.FC = () => {
                     setFormError('Failed to update project');
                 }
             } else {
-                // Create new project
                 const newProject = await createProject(projectData);
 
                 if (newProject) {
                     setFormSuccess('Project created successfully!');
-                    // Add the new project to the list
                     setProjects([newProject, ...projects]);
                     resetForm();
                 } else {
@@ -180,19 +174,15 @@ const ProjectAdmin: React.FC = () => {
         try {
             setUploadingImage(true);
 
-            // Only attempt to delete from storage if it's not being used elsewhere
             const isUsedElsewhere = projects.some(project => {
-                // Skip the current project if we're editing
                 if (isEditing && currentProject && project.id === currentProject.id) {
                     return false;
                 }
 
-                // Check if the URL is used as a thumbnail
                 if (project.thumbnail_image_url === url) {
                     return true;
                 }
 
-                // Check if the URL is used in detail images
                 return project.detail_images?.includes(url) || false;
             });
 
@@ -200,7 +190,6 @@ const ProjectAdmin: React.FC = () => {
                 await deleteImage(url);
             }
 
-            // Remove from local state regardless
             const newDetailImages = [...detailImages];
             newDetailImages.splice(index, 1);
             setDetailImages(newDetailImages);
@@ -218,7 +207,6 @@ const ProjectAdmin: React.FC = () => {
             return;
         }
 
-        // Check for duplicate tag names
         if (tags.some(tag => tag.name.toLowerCase() === tagName.toLowerCase())) {
             setFormError('Tag already exists');
             return;
@@ -231,7 +219,7 @@ const ProjectAdmin: React.FC = () => {
 
         setTags([...tags, newTag]);
         setTagName('');
-        setTagColor('#3B82F6'); // Reset to default color
+        setTagColor('#3B82F6');
         setFormError(null);
     };
 

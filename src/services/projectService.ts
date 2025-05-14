@@ -161,15 +161,13 @@ const uploadImage = async (file: File, folderPath: string): Promise<string | nul
 
 export const deleteImage = async (url: string): Promise<boolean> => {
   try {
-    // Extract the path from the URL
-    // Example URL: https://xxxx.supabase.co/storage/v1/object/public/project-images/thumbnails/123.jpg
     const urlParts = url.split('/project-images/');
     if (urlParts.length < 2) {
       console.error('Invalid image URL format');
       return false;
     }
     
-    const path = urlParts[1]; // e.g., "thumbnails/123.jpg"
+    const path = urlParts[1]; 
     
     const { error } = await supabase.storage
       .from('project-images')

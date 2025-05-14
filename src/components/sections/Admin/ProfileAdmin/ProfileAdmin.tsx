@@ -114,7 +114,6 @@ const ProfileAdmin: React.FC = () => {
 
   const handleAddQuickFact = () => {
     if (newQuickFact.trim()) {
-      // Create a new array with the added fact to ensure state update
       const updatedFacts = [...quickFacts, newQuickFact.trim()];
       setQuickFacts(updatedFacts);
       setNewQuickFact('');
@@ -122,7 +121,6 @@ const ProfileAdmin: React.FC = () => {
   };
 
   const handleRemoveQuickFact = (index: number) => {
-    // Create a new array without the removed fact
     const updatedFacts = quickFacts.filter((_, i) => i !== index);
     setQuickFacts(updatedFacts);
   };
@@ -138,7 +136,7 @@ const ProfileAdmin: React.FC = () => {
         return;
       }
 
-      console.log('Submitting quick facts:', quickFacts); // Debug log
+      console.log('Submitting quick facts:', quickFacts);
       
       const result = await updateProfileQuickFacts(quickFacts);
       

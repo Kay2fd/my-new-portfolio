@@ -52,7 +52,6 @@ const CardLoader: React.FC<CardLoaderProps> = ({
         />
       )}
       <div className="p-4 space-y-3">
-        {/* Title */}
         <motion.div
           className={`h-6 w-3/4 rounded ${shimmerClasses}`}
           variants={shimmerVariants}
@@ -60,20 +59,17 @@ const CardLoader: React.FC<CardLoaderProps> = ({
           animate="animate"
         />
 
-        {/* Content lines */}
         {Array.from({ length: lines }).map((_, index) => (
           <motion.div
             key={index}
-            className={`h-4 w-full rounded ${shimmerClasses} ${
-              index === lines - 1 ? 'w-2/3' : 'w-full'
-            }`}
+            className={`h-4 w-full rounded ${shimmerClasses} ${index === lines - 1 ? 'w-2/3' : 'w-full'
+              }`}
             variants={shimmerVariants}
             initial="initial"
             animate="animate"
           />
         ))}
 
-        {/* Button/Action area */}
         <motion.div
           className={`h-8 w-1/3 mt-4 rounded ${shimmerClasses}`}
           variants={shimmerVariants}

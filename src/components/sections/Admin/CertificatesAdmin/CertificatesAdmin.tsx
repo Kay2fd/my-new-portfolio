@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../../../context/ThemeProvider';
-import { 
-  fetchCertificates, 
-  createCertificate, 
-  updateCertificate, 
+import {
+  fetchCertificates,
+  createCertificate,
+  updateCertificate,
   deleteCertificate,
-  type Certificate 
+  type Certificate
 } from '../../../../services/certificateServices';
 import CertificatesAdminView from './CertificatesAdmin.view';
 
 const CertificatesAdmin: React.FC = () => {
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
-  
+
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   const [isEditing, setIsEditing] = useState(false);
   const [currentCertificate, setCurrentCertificate] = useState<Certificate | null>(null);
-  
+
   const [title, setTitle] = useState('');
   const [issuer, setIssuer] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  
+
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
@@ -88,7 +88,6 @@ const CertificatesAdmin: React.FC = () => {
     setFormError(null);
     setFormSuccess(null);
 
-    // Validate form
     if (!title.trim() || !issuer.trim() || !description.trim() || !imageUrl.trim()) {
       setFormError('All fields are required');
       return;
@@ -96,7 +95,6 @@ const CertificatesAdmin: React.FC = () => {
 
     try {
       if (isEditing && currentCertificate) {
-        // Update existing certificate
         const success = await updateCertificate(currentCertificate.id, {
           title,
           issuer,
@@ -106,10 +104,9 @@ const CertificatesAdmin: React.FC = () => {
 
         if (success) {
           setFormSuccess('Certificate updated successfully!');
-          // Update the certificates list
-          setCertificates(certificates.map(cert => 
-            cert.id === currentCertificate.id 
-              ? { ...cert, title, issuer, description, image_url: imageUrl } 
+          setCertificates(certificates.map(cert =>
+            cert.id === currentCertificate.id
+              ? { ...cert, title, issuer, description, image_url: imageUrl }
               : cert
           ));
           resetForm();
@@ -117,7 +114,6 @@ const CertificatesAdmin: React.FC = () => {
           setFormError('Failed to update certificate');
         }
       } else {
-        // Create new certificate
         const newCertificate = await createCertificate({
           title,
           issuer,
@@ -127,7 +123,6 @@ const CertificatesAdmin: React.FC = () => {
 
         if (newCertificate) {
           setFormSuccess('Certificate created successfully!');
-          // Add the new certificate to the list
           setCertificates([newCertificate, ...certificates]);
           resetForm();
         } else {

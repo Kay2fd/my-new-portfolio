@@ -17,13 +17,11 @@ const LoginPage: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Check if user is already logged in
     useEffect(() => {
         const checkAuth = async () => {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
                 setIsAuthenticated(true);
-                // Redirect to admin dashboard or intended page
                 const from = (location.state as any)?.from?.pathname || '/admin/profile';
                 navigate(from, { replace: true });
             }
@@ -47,7 +45,6 @@ const LoginPage: React.FC = () => {
             if (error) throw error;
 
             if (data.user) {
-                // Redirect to admin dashboard or intended page
                 const from = (location.state as any)?.from?.pathname || '/admin/profile';
                 navigate(from, { replace: true });
             }
