@@ -123,7 +123,7 @@ const Certificates: React.FC = () => {
                                 <img
                                     src={cert.image_url}
                                     alt={cert.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                    className="w-full h-full transition-transform duration-500 hover:scale-110"
                                 />
                             </div>
                             <div className={`p-6 ${isDarkMode ? '' : 'bg-white'}`}>
@@ -176,7 +176,7 @@ const Certificates: React.FC = () => {
                                 <img
                                     src={selectedCertificate.image_url}
                                     alt={selectedCertificate.title}
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full"
                                 />
                                 <button
                                     className="absolute top-4 right-4 bg-black/60 text-white rounded-full p-2 hover:bg-black/80 transition-colors"

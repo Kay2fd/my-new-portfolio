@@ -14,6 +14,7 @@ const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const LoginPage = lazy(() => import('../pages/Login/LoginPage'));
 const ProfileAdminPage = lazy(() => import('../pages/Admin/Profile/ProfileAdmin'));
 const CertificatesAdminPage = lazy(() => import('../pages/Admin/Certificates/CertificatesAdminPage'));
+const ProjectsAdminPage = lazy(() => import('../pages/Admin/Projects/ProjectsAdminPage'));
 
 interface RouteConfig {
   path: string;
@@ -112,6 +113,14 @@ const Router = () => {
             element={
               <LazyLoad>
                 <CertificatesAdminPage />
+              </LazyLoad>
+            }
+          />
+          <Route
+            path="projects"
+            element={
+              <LazyLoad>
+                <ProjectsAdminPage />
               </LazyLoad>
             }
           />
