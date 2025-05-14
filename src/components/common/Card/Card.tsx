@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeProvider';
+import CardLoader from '../CardLoader/CardLoader';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: 'default' | 'outlined' | 'elevated' | 'glass';
@@ -8,6 +9,10 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     clickable?: boolean;
     motionProps?: MotionProps;
     children: React.ReactNode;
+    isLoading?: boolean;
+    loaderLines?: number;
+    loaderImageHeight?: string;
+    loaderHasImage?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -17,6 +22,10 @@ const Card: React.FC<CardProps> = ({
     motionProps,
     className = '',
     children,
+    isLoading = false,
+    loaderLines = 3,
+    loaderImageHeight = 'h-48',
+    loaderHasImage = true,
     ...rest
 }) => {
     const { theme } = useTheme();
@@ -57,6 +66,17 @@ const Card: React.FC<CardProps> = ({
     ${clickableClasses} 
     ${className}
   `.trim();
+
+    if (isLoading) {
+        return (
+            <CardLoader 
+                lines={loaderLines} 
+                imageHeight={loaderImageHeight} 
+                hasImage={loaderHasImage} 
+                className={className}
+            />
+        );
+    }
 
     return (
         <motion.div

@@ -51,10 +51,6 @@ const ProfileSection: React.FC = () => {
         loadProfileData();
     }, []);
 
-    if (loading) {
-        return <div className="text-center py-16">Loading profile...</div>;
-    }
-
     return (
         <section className="mb-16">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -65,6 +61,10 @@ const ProfileSection: React.FC = () => {
                         motionProps={{
                             whileHover: { y: -5 }
                         }}
+                        isLoading={loading}
+                        loaderLines={4}
+                        loaderImageHeight="h-48"
+                        loaderHasImage={true}
                     >
                         <div className="mb-6 relative mx-auto">
                             <div className={`w-48 h-48 rounded-full overflow-hidden mx-auto border-4 ${isDarkMode ? 'border-blue-500/30' : 'border-blue-200'}`}>
@@ -130,6 +130,10 @@ const ProfileSection: React.FC = () => {
                     <Card
                         variant="glass"
                         className="p-6 h-full"
+                        isLoading={loading}
+                        loaderLines={6}
+                        loaderImageHeight="h-0"
+                        loaderHasImage={false}
                     >
                         <h3 className={`text-2xl font-bold mb-4 pb-3 border-b ${isDarkMode ? 'text-white border-blue-800/30' : 'text-blue-700 border-blue-200'
                             }`}>

@@ -51,7 +51,7 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
     title,
     shortDescription,
     description,
-    thumbnailUrl,   
+    thumbnailUrl,
     detailImages,
     repoUrl,
     demoUrl,
@@ -85,7 +85,6 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
             </h1>
 
             <div className="grid grid-cols-1 gap-4 md:gap-8">
-                {/* Project Form */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6 mb-6"
@@ -224,7 +223,6 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                             </div>
                         </div>
 
-                        {/* Tags Section */}
                         <div className="mb-6">
                             <div className={`p-4 rounded-lg mb-4 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
                                 <h3 className={`text-base md:text-lg font-medium mb-3 flex items-center ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -293,7 +291,6 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                             </div>
                         </div>
 
-                        {/* Thumbnail Image */}
                         <div className="mb-6">
                             <label
                                 className={`block mb-1 md:mb-2 text-sm md:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
@@ -308,7 +305,6 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                             />
                         </div>
 
-                        {/* Detail Images */}
                         <div className="mb-6">
                             <label
                                 className={`block mb-1 md:mb-2 text-sm md:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
@@ -361,7 +357,6 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                     </form>
                 </Card>
 
-                {/* Projects List */}
                 <Card
                     variant="glass"
                     className="p-4 md:p-6 mb-14"
