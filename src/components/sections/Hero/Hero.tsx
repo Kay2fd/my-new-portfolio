@@ -45,12 +45,14 @@ const Hero = () => {
                     <Button
                         variant="primary"
                         size="lg"
+                        onClick={() => window.location.href = '/projects'}
                     >
                         View My Work
                     </Button>
                     <Button
                         variant="outline"
                         size="lg"
+                        onClick={() => window.location.href = '/contact'}
                     >
                         Contact Me
                     </Button>
