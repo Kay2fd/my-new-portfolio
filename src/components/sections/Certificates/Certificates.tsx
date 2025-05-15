@@ -110,11 +110,21 @@ const Certificates: React.FC = () => {
                                     whileHover: { y: -5, transition: { duration: 0.2 } }
                                 }}
                             >
-                                <div className="h-48 overflow-hidden">
+                                <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-800">
                                     <img
                                         src={cert.image_url}
                                         alt={cert.title}
-                                        className="w-full h-full transition-transform duration-500 hover:scale-110"
+                                        className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        onLoad={(e) => {
+                                            const img = e.target as HTMLImageElement;
+                                            const aspectRatio = img.naturalWidth / img.naturalHeight;
+                                            
+                                            // For extreme aspect ratios, adjust the container
+                                            if (aspectRatio > 2 || aspectRatio < 0.5) {
+                                                const container = img.parentElement as HTMLElement;
+                                                container.style.aspectRatio = aspectRatio > 2 ? '2/1' : '1/2';
+                                            }
+                                        }}
                                     />
                                 </div>
                                 <div className={`p-6 ${isDarkMode ? '' : 'bg-white'}`}>
@@ -154,46 +164,61 @@ const Certificates: React.FC = () => {
                         onClick={closeCertificate}
                     >
                         <motion.div
-                            className={`rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col shadow-xl ${isDarkMode
-                                ? "bg-blue-900/20 backdrop-blur-sm border border-blue-800/30"
-                                : "bg-white shadow-lg border border-blue-200"
-                                }`}
+                            className={`relative rounded-xl overflow-hidden shadow-xl ${
+                                isDarkMode 
+                                    ? "bg-blue-900/20 backdrop-blur-sm border border-blue-800/30"
+                                    : "bg-white shadow-lg border border-blue-200"
+                            }`}
+                            style={{
+                                width: '95vw',
+                                maxWidth: '1400px',
+                                height: '90vh',
+                            }}
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className={`relative h-96 ${isDarkMode ? "bg-gray-800/50" : "bg-blue-50"
+                            <Button
+                                variant="text"
+                                size="sm"
+                                onClick={closeCertificate}
+                                className="absolute top-3 right-3 z-50 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm"
+                                aria-label="close"
+                            >
+                                <FaTimes className="w-5 h-5" />
+                            </Button>
+
+                            <div className="flex flex-col md:flex-row h-full">
+                                <div className={`flex-1 flex items-center justify-center p-4 md:p-8 ${
+                                    isDarkMode ? "bg-gray-800/50" : "bg-gray-100"
                                 }`}>
-                                <img
-                                    src={selectedCertificate.image_url}
-                                    alt={selectedCertificate.title}
-                                    className="w-full h-full"
-                                />
-                                <Button
-                                    variant="text"
-                                    size="sm"
-                                    onClick={closeCertificate}
-                                    className="absolute top-2 right-2 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm"
-                                    aria-label="close"
-                                >
-                                    <FaTimes />
-                                </Button>
-                            </div>
-                            <div className={`p-6 ${isDarkMode ? "" : "bg-white"
-                                }`}>
-                                <h3 className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-blue-700'}`}>
-                                    {selectedCertificate.title}
-                                </h3>
-                                <div className="flex items-center mb-4">
-                                    <HiAcademicCap className={`mr-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
-                                    <span className={`text-lg font-medium ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-                                        {selectedCertificate.issuer}
-                                    </span>
+                                    <div className="relative w-full h-full flex items-center justify-center">
+                                        <img
+                                            src={selectedCertificate.image_url}
+                                            alt={selectedCertificate.title}
+                                            className="max-w-full max-h-full object-contain"
+                                            style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))' }}
+                                        />
+                                    </div>
                                 </div>
-                                <p className={`mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                    {selectedCertificate.description}
-                                </p>
+
+                                <div className={`w-full md:w-96 flex flex-col p-6 ${
+                                    isDarkMode ? "bg-blue-900/30" : "bg-white"
+                                }`}>
+                                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-blue-700'}`}>
+                                        {selectedCertificate.title}
+                                    </h3>
+                                    <div className="flex items-center mb-4">
+                                        <HiAcademicCap className={`mr-2 text-xl ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+                                        <span className={`text-lg font-medium ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                                            {selectedCertificate.issuer}
+                                        </span>
+                                    </div>
+                                    <p className={`text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                        {selectedCertificate.description}
+                                    </p>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>

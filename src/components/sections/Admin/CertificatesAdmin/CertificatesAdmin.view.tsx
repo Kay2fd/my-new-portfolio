@@ -225,11 +225,19 @@ const CertificatesAdminView: React.FC<CertificatesAdminViewProps> = ({
                   {certificates.map((certificate) => (
                     <tr key={certificate.id} className={isDarkMode ? 'bg-blue-800/10' : 'bg-blue-100'}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="h-18 w-36 rounded overflow-hidden">
+                        <div className="h-24 w-36 rounded overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                           <img 
                             src={certificate.image_url} 
                             alt={certificate.title}
-                            className="h-full w-full object-cover"
+                            className="max-h-full max-w-full object-contain"
+                            onLoad={(e) => {
+                              const img = e.target as HTMLImageElement;
+                              if (img.naturalWidth > img.naturalHeight) {
+                                img.classList.add('w-full');
+                              } else {
+                                img.classList.add('h-full');
+                              }
+                            }}
                             onError={(e) => {
                               e.currentTarget.src = 'https://via.placeholder.com/150?text=No+Image';
                             }}
