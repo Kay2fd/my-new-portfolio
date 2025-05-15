@@ -37,7 +37,7 @@ const Projects: React.FC = () => {
     loadProjects();
   }, []);
 
-  const isValidUrl = (url?: string): boolean => {
+  const isValidUrl = (url?: string | null): boolean => {
     return !!url && url.trim() !== '';
   };
 
@@ -137,7 +137,7 @@ const Projects: React.FC = () => {
                         </span>
 
                         <div className="flex space-x-2">
-                          {isValidUrl(project.repo_url) && (
+                          {project.repo_url && isValidUrl(project.repo_url) && (
                             <a
                               href={project.repo_url}
                               target="_blank"
@@ -149,7 +149,7 @@ const Projects: React.FC = () => {
                               <FaGithub className="h-5 w-5" />
                             </a>
                           )}
-                          {isValidUrl(project.demo_url) && (
+                          {project.demo_url && isValidUrl(project.demo_url) && (
                             <a
                               href={project.demo_url}
                               target="_blank"

@@ -189,17 +189,33 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                                 >
                                     Repository URL (optional)
                                 </label>
-                                <input
-                                    id="repoUrl"
-                                    type="url"
-                                    value={repoUrl}
-                                    onChange={(e) => setRepoUrl(e.target.value)}
-                                    className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                        ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                        : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                <div className="relative">
+                                    <input
+                                        id="repoUrl"
+                                        type="url"
+                                        value={repoUrl}
+                                        onChange={(e) => setRepoUrl(e.target.value)}
+                                        className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
+                                            ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                            : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                         }`}
-                                    placeholder="https://github.com/username/repo"
-                                />
+                                        placeholder="https://github.com/username/repo"
+                                    />
+                                    {repoUrl && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setRepoUrl('')}
+                                            className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full ${
+                                                isDarkMode 
+                                                    ? 'bg-red-900/30 text-red-300 hover:bg-red-800/50' 
+                                                    : 'bg-red-100 text-red-600 hover:bg-red-200'
+                                            }`}
+                                            title="Clear repository URL"
+                                        >
+                                            <FaTimes size={12} />
+                                        </button>
+                                    )}
+                                </div>
                             </div>
 
                             <div>
@@ -209,17 +225,33 @@ const ProjectAdminView: React.FC<ProjectAdminViewProps> = ({
                                 >
                                     Demo URL (optional)
                                 </label>
-                                <input
-                                    id="demoUrl"
-                                    type="url"
-                                    value={demoUrl}
-                                    onChange={(e) => setDemoUrl(e.target.value)}
-                                    className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
-                                        ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
-                                        : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
+                                <div className="relative">
+                                    <input
+                                        id="demoUrl"
+                                        type="url"
+                                        value={demoUrl}
+                                        onChange={(e) => setDemoUrl(e.target.value)}
+                                        className={`w-full p-2 border rounded focus:outline-none focus:ring-2 text-sm md:text-base ${isDarkMode
+                                            ? 'bg-gray-800 border-gray-700 text-white focus:ring-blue-500'
+                                            : 'bg-white border-gray-300 text-gray-900 focus:ring-blue-500'
                                         }`}
-                                    placeholder="https://example.com"
-                                />
+                                        placeholder="https://example.com"
+                                    />
+                                    {demoUrl && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setDemoUrl('')}
+                                            className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full ${
+                                                isDarkMode 
+                                                    ? 'bg-red-900/30 text-red-300 hover:bg-red-800/50' 
+                                                    : 'bg-red-100 text-red-600 hover:bg-red-200'
+                                            }`}
+                                            title="Clear demo URL"
+                                        >
+                                            <FaTimes size={12} />
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

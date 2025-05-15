@@ -120,18 +120,30 @@ const ProjectAdmin: React.FC = () => {
         }
 
         try {
-            const projectData = {
+            const projectData: any = {
                 title,
                 short_description: shortDescription,
                 description,
                 thumbnail_image_url: thumbnailUrl,
                 detail_images: detailImages,
                 tags,
-                repo_url: repoUrl || undefined,
-                demo_url: demoUrl || undefined
             };
 
+            if (repoUrl.trim()) {
+                projectData.repo_url = repoUrl.trim();
+            }
+            if (demoUrl.trim()) {
+                projectData.demo_url = demoUrl.trim();
+            }
+
             if (isEditing && currentProject) {
+                if (!repoUrl.trim()) {
+                    projectData.repo_url = null;
+                }
+                if (!demoUrl.trim()) {
+                    projectData.demo_url = null;
+                }
+
                 const success = await updateProject(currentProject.id, projectData);
 
                 if (success) {
