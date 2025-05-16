@@ -281,7 +281,7 @@ const ProjectDetail: React.FC = () => {
                                     variant="glass"
                                     className="p-6 mb-8"
                                 >
-                                    <h2 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    <h2 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-blue-900'}`}>
                                         Project Overview
                                     </h2>
                                     <p className={`whitespace-pre-line ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -321,11 +321,11 @@ const ProjectDetail: React.FC = () => {
 
                                 {relatedProjects.length > 0 && (
                                     <div className="mt-16">
-                                        <h2 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                                        <h2 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-blue-900'}`}>
                                             More Projects
                                         </h2>
 
-                                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-6">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             {relatedProjects.map((relatedProject, index) => (
                                                 <Card
                                                     key={relatedProject.id}
@@ -339,21 +339,35 @@ const ProjectDetail: React.FC = () => {
                                                         transition: { duration: 0.5, delay: 0.2 + index * 0.1 }
                                                     }}
                                                 >
-                                                    <Link to={`/projects/${relatedProject.id}`} className="flex flex-col h-full">
-                                                        <div className="flex-shrink-0 relative h-40 overflow-hidden">
+                                                    <Link to={`/projects/${relatedProject.id}`} className="block">
+                                                        <div className="aspect-[16/9] relative overflow-hidden">
                                                             <img
-                                                                className="w-full h-full"
+                                                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                                                 src={relatedProject.thumbnail_image_url}
                                                                 alt={relatedProject.title}
                                                                 onError={(e) => {
                                                                     e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image';
                                                                 }}
                                                             />
-                                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                                                                <div className="p-4">
-                                                                    <h3 className="text-lg font-semibold text-white">
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+                                                                <div className="absolute bottom-0 p-4 w-full">
+                                                                    <div className="flex flex-wrap gap-2 mb-2">
+                                                                        {relatedProject.tags.slice(0, 2).map((tag, tagIndex) => (
+                                                                            <span
+                                                                                key={tagIndex}
+                                                                                className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm"
+                                                                                style={{ color: tag.color }}
+                                                                            >
+                                                                                {tag.name}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                    <h3 className="text-lg font-semibold text-white line-clamp-2">
                                                                         {relatedProject.title}
                                                                     </h3>
+                                                                    <p className="mt-1 text-sm text-gray-300 line-clamp-2">
+                                                                        {relatedProject.short_description}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
