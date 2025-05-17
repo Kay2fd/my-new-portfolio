@@ -75,8 +75,10 @@
   <p>Create a <code>.env</code> file in the root directory:</p>
 
   ```env
-  VITE_SUPABASE_URL=your_supabase_url
-  VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SUPABASE_URL=your_supabase_url_here
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+VITE_SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+VITE_ADMIN_PASSWORD=your_admin_password_here
   ```
 
   <h4>4. Set up Supabase tables</h4>
