@@ -14,7 +14,7 @@
 
 <div id="demo">
   <h2>🌟 Demo</h2>
-  <p>Visit the live demo: <a href="https://kay2fd-portfolio.vercel.app">My Portfolio</a></p>
+  <p>Visit the live demo: <a href="https://my-new-portfolio-five-rouge.vercel.app/">My Portfolio</a></p>
 </div>
 
 <div id="features">
@@ -138,7 +138,7 @@
   <h2>👤 Author</h2>
   <p>
     <strong>Dika Pangestu</strong><br>
-    GitHub: <a href="https://github.com/Kay2fd">@Kay2fd</a><br>
+    GitHub: <a href="https://github.com/dikapang">@dikapang</a><br>
     LinkedIn: <a href="https://www.linkedin.com/in/dika-pangestu">Dika Pangestu</a>
   </p>
 </div>
