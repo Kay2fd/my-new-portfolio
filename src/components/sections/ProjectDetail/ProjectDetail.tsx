@@ -289,7 +289,6 @@ const ProjectDetail: React.FC = () => {
                                     </p>
                                 </Card>
 
-                                {/* Only show buttons container if at least one URL exists */}
                                 {(isValidUrl(project.repo_url) || isValidUrl(project.demo_url)) && (
                                     <div className="flex flex-col sm:flex-row gap-4">
                                         {isValidUrl(project.repo_url) && (

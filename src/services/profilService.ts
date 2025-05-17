@@ -50,10 +50,12 @@ export const fetchProfileData = async (): Promise<ProfileInfo | null> => {
       socialLinks: data.social_links || [
         {
           name: "GitHub",
+          url: "https://github.com/dikapang",
           iconType: "github"
         },
         {
           name: "LinkedIn",
+          url: "https://www.linkedin.com/in/dikapangestu/",
           iconType: "linkedin"
         },
         {
